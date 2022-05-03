@@ -1,15 +1,17 @@
 const initialState = {
-    user: {}
+    user: {},
+    authenticated: false
 }
 
 export const userReducer = (state=initialState, action) => {
     const {type, payload} = action;
     switch(type) {
         case "INITIALIZE_USER": 
-            const {email, password} = payload;
+            const {email} = payload;
             return {
                 ...state,
-                user: {email, password}
+                user: {email},
+                authenticated: true
             }
         default: 
             return state;

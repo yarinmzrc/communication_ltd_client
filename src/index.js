@@ -13,7 +13,7 @@ const store = configureStore({reducer: userReducer});
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-    <App />
+      <App />
     </Provider>
   </React.StrictMode>
 );

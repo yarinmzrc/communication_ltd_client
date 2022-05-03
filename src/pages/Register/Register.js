@@ -10,9 +10,13 @@ const defaultDetails = {
 export const RegisterPage = () => {
     const [userDetails, setUserDetails] = useState(defaultDetails);
 
+    const handleChange = (e) => {
+        setUserDetails({...userDetails, [e.target.id]: e.target.value})
+    }
+
     return (
         <div className='page'>
-            <Container userDetails={userDetails} setUserDetails={setUserDetails} email={userDetails.email} password={userDetails.password} name="Register" />
+            <Container userDetails={userDetails} handleChange={handleChange} email={userDetails.email} password={userDetails.password} name="Register" />
         </div>
 )
 }
