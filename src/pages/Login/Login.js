@@ -18,5 +18,6 @@ export const LoginPage = () => {
   return (<div className="page">
       <Container userDetails={userDetails} handleChange={handleChange} email={userDetails.email} password={userDetails.password} name="Login" />
       <Link className="create" to="/register">Create New Account</Link>
+      <Link className="create" to="/forgot-password">Forgot Password? Click Here</Link>
   </div>);
 };

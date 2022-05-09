@@ -1,9 +1,62 @@
 .system-page {
     height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     h1 {
         margin-top: 5rem;
+    }
+
+    .customers {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+        border-radius: .5rem;
+        box-shadow: rgba(100, 100, 111, 0.15) 0px 7px 29px 0px;
+    }
+    .new-customer { 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 30rem;
+        width: 25rem;
+        padding: 2rem;
+        border-radius: .5rem;
+        box-shadow: rgba(100, 100, 111, 0.15) 0px 7px 29px 0px;
+        
+        input {
+            padding: .5rem;
+            margin: 1rem;
+            font-size: 1rem;
+            letter-spacing: .02rem;
+        }
+        
+        >* {
+            margin: 1.5rem .4rem;
+        }
+    
+        label {
+            margin: 0rem;
+            text-align: start;
+        }
+    
+        .btn {
+            all: unset;
+            cursor: pointer;
+            padding: .5rem .8rem;
+            margin: 1rem;
+            background-color: transparent;
+            border: 2px solid #626262;
+            font-weight: 500;
+            font-size: 1.2rem;
+        }
+    
+        .btn:hover {
+            background-color: #626262;
+            color: white;
+            transition: all 200ms ease-in-out;
+        }
     }
 }
