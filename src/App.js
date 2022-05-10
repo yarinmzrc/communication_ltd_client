@@ -9,10 +9,12 @@ const App = () => {
   const loading = useSelector(state => state.loading);
 
   useEffect(()=> {
+    dispatch({type: "SET_LOADING"});
     const token = localStorage.getItem("token");
     if(token) {
       getUser(token);
-      
+    } else {
+      dispatch({type: "STOP_LOADING"});
     }
   },[])
 

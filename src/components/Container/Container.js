@@ -29,7 +29,15 @@ export const Container = ({name, email, password, handleChange, userDetails}) =>
                 const res = await axios.post("http://localhost:3001/create-user", {
                     userDetails
                 })
-                if(res) {
+                if(res === "You Riched the top of the attempts") {
+                    SetTextToSend("You Riched the top of the attempts");
+                    setIsOpen(true);
+                }
+                else if(res === "Password is Not Valid") {
+                    SetTextToSend("Password is Not Valid");
+                    setIsOpen(true);
+                }
+                else if(res) {
                     console.log(res);
                     const {email,customers} = res.data;
                     const customersRes = JSON.parse(customers);
