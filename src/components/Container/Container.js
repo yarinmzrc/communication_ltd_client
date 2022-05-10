@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom";
 import BasicModal from "../Modal/Modal";
 
+
 export const Container = ({name, email, password, handleChange, userDetails}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -22,16 +23,19 @@ export const Container = ({name, email, password, handleChange, userDetails}) =>
           setIsOpen(false);
       }
 
-    const handleClick = async () => {
+    const handleClick = async (e) => {
         if(validateEmail(email)) {
             if(name === "Register") {
                 const res = await axios.post("http://localhost:3001/create-user", {
                     userDetails
                 })
                 if(res) {
-                    const {emailRes, passwordRes} = res.data;
-                    dispatch({type: "INITIALIZE_USER", payload: {email: emailRes,password: passwordRes} })
-                    
+                    console.log(res);
+                    const {email,customers} = res.data;
+                    const customersRes = JSON.parse(customers);
+                    dispatch({type: "INITIALIZE_USER", payload: {email: email, customers: customersRes} })
+                    SetTextToSend("User Created")
+                    setIsOpen(true);
                 }
             } else if(name === "Login") {
                 const res = await axios.post("http://localhost:3001/login-user", {
@@ -42,10 +46,9 @@ export const Container = ({name, email, password, handleChange, userDetails}) =>
                     setIsOpen(true);
                     
                 } else if(res) {
-                    const emailRes = res.data.email;
-                    const customersRes = JSON.parse(res.data.customers);
-                    console.log(customersRes);
-                    await dispatch({type: "INITIALIZE_USER", payload: {email: emailRes, customers: customersRes} });
+                    const {email, customers} = res.data;
+                    localStorage.setItem("token", res.data.token);
+                    dispatch({type:"INITIALIZE_USER", payload: {email, customers}});
                     navigate('/system', { replace: true });
                 }
         }

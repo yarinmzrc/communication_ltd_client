@@ -18,11 +18,10 @@
     }
     .new-customer { 
         display: flex;
-        flex-direction: column;
         align-items: center;
-        height: 30rem;
-        width: 25rem;
+        flex-direction: column;
         padding: 2rem;
+        margin: 2rem;
         border-radius: .5rem;
         box-shadow: rgba(100, 100, 111, 0.15) 0px 7px 29px 0px;
         

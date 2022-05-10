@@ -5,9 +5,14 @@
     align-items: center;
     background-color: beige;
 
-    .modal {
-        height: 10rem;
-        width: 8rem;
-        background-color: aqua;
+    .btn {
+        all: unset;
+        cursor: pointer;
+        padding: .5rem .8rem;
+        margin: 1rem;
+        background-color: transparent;
+        border: 2px solid #626262;
+        font-weight: 500;
+        font-size: 1.2rem;
     }
 }

@@ -1,6 +1,7 @@
 const initialState = {
     user: {},
-    authenticated: false
+    authenticated: localStorage.getItem('token') ? true : false,
+    loading: true
 }
 
 export const userReducer = (state=initialState, action) => {
@@ -10,8 +11,15 @@ export const userReducer = (state=initialState, action) => {
             const {email, customers} = payload;
             return {
                 ...state,
-                user: {email, customers},
-                authenticated: true
+                user: {email, customers: customers},
+                authenticated: true,
+                loading: false
+            }
+        case "LOG_OUT": 
+            return {
+                ...state,
+                user: {},
+                authenticated: false
             }
         case "CHANGE_PASSWORD": 
             const {password} = payload;
@@ -24,6 +32,16 @@ export const userReducer = (state=initialState, action) => {
             return {
                 ...state,
                 user: {...state.user, customers: newCustomers}
+            }
+        case "SET_LOADING":
+            return {
+                ...state,
+                loading: true
+            }
+        case "STOP_LOADING": 
+            return {
+                ...state,
+                loading: false
             }
         default: 
             return state;
