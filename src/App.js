@@ -19,7 +19,7 @@ const App = () => {
   },[])
 
   const getUser = async (token) => {
-    const res = await axios.get("http://localhost:3001/get-user", {
+    const res = await axios.get("https://localhost:3001/get-user", {
       headers: {
         'Authorization': token
       }

@@ -20,7 +20,7 @@ export const SystemPage = () => {
   const handleAddCustomer = async () => {
     const newCustomers = [...customers];
     newCustomers.push(customer);
-    const res = await axios.post("http://localhost:3001/add-customer", {
+    const res = await axios.post("https://localhost:3001/add-customer", {
       email, customerData: newCustomers
     })
     if(res) {

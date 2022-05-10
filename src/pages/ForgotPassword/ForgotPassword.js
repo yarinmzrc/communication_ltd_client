@@ -17,7 +17,7 @@ export const ForgotPassword = () => {
 
   const handleClick = async () => {
     setIsClicked(true);
-    const res = await axios.get("http://localhost:3001/forgot-password");
+    const res = await axios.get("https://localhost:3001/forgot-password");
     if(res) {
       console.log(res.data);
       dispatch({type: "CHANGE_PASSWORD", payload: {password: res.data}});

@@ -26,7 +26,7 @@ export const Container = ({name, email, password, handleChange, userDetails}) =>
     const handleClick = async (e) => {
         if(validateEmail(email)) {
             if(name === "Register") {
-                const res = await axios.post("http://localhost:3001/create-user", {
+                const res = await axios.post("https://localhost:3001/create-user", {
                     userDetails
                 })
                 if(res === "You Riched the top of the attempts") {
@@ -46,7 +46,7 @@ export const Container = ({name, email, password, handleChange, userDetails}) =>
                     setIsOpen(true);
                 }
             } else if(name === "Login") {
-                const res = await axios.post("http://localhost:3001/login-user", {
+                const res = await axios.post("https://localhost:3001/login-user", {
                 userDetails
             });
                 if(res && typeof(res.data) === "string") {

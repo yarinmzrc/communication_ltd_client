@@ -23,7 +23,7 @@ export const ChangePassword = () => {
     const handleClick = async (e) => {
         const {email, nextPassword} = passwordData; 
         e.preventDefault();
-        const res = await axios.post("http://localhost:3001/change-password", {
+        const res = await axios.post("https://localhost:3001/change-password", {
             email, password: nextPassword
         });
         if(res) {
