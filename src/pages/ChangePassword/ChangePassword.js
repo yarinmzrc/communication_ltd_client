@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import BasicModal from '../../components/Modal/Modal';
 import './ChangePassword.scss';
 
 const defaultData = {
@@ -13,6 +14,8 @@ const defaultData = {
 
 export const ChangePassword = () => {
     const [passwordData, setPasswordData] = useState(defaultData);
+    const [isOpen, setIsOpen] = useState(false);
+    const [textToSend, SetTextToSend] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -26,14 +29,23 @@ export const ChangePassword = () => {
         const res = await axios.post("https://localhost:3001/change-password", {
             email, password: nextPassword
         });
-        if(res) {
+        if(res.data === "Email is not registered") {
+          SetTextToSend("Email is not registered");
+          setIsOpen(true);
+        } else if(res) {
           console.log(res.data);
           dispatch({type: "CHANGE_PASSWORD", payload: {password: res.data}});
-          navigate('/');
+          SetTextToSend("Password has changed")
+          setIsOpen(true);
       }
     }
 
+    const handleClose = () => {
+      setIsOpen(false);
+    }
+
   return <div className='change-password-page'>
+    {isOpen ? <BasicModal text={textToSend} handleClose={handleClose} /> : ''}
       <h1>Change Password</h1>
       <form className='change-form'>
       <label htmlFor="email">Email</label>

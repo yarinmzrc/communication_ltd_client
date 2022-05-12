@@ -38,6 +38,7 @@ export default function BasicModal({text, handleClose}) {
         <Box sx={style}>
           <h3>{text}</h3>
           {text === "User Created" ? <button sx={btnStyle} onClick={() => navigate('/')}>Go To Login Page</button> : ''}
+          {text === "Password has changed" ? <button sx={btnStyle} onClick={() => navigate('/')}>Go To Login Page</button> : ''}
         </Box>
       
       </Modal>
