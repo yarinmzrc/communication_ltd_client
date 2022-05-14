@@ -2,6 +2,7 @@ import './System.scss';
 import {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
+import dompurify from 'dompurify';
 
 const defaultCustomer = {
   first: '',
@@ -11,13 +12,16 @@ const defaultCustomer = {
 export const SystemPage = () => {
   const {customers, email} = useSelector(state => state.user);
   const [customer, setCustomer] = useState(defaultCustomer);
+  const [text, setText] = useState("");
   const dispatch = useDispatch();
+  const sanitizer = dompurify.sanitize;
 
   const handleChange = (e) => {
     setCustomer({...customer, [e.target.name]: e.target.value});
   }
 
   const handleAddCustomer = async () => {
+    setText(customer.first);
     const newCustomers = [...customers];
     newCustomers.push(customer);
     const res = await axios.post("https://localhost:3001/add-customer", {
@@ -30,7 +34,9 @@ export const SystemPage = () => {
 
   }
 
-  return <div className='system-page'>
+  return <div >
+    {text ? <div dangerouslySetInnerHTML={{__html: sanitizer(text)}} ></div> : ""}
+   <div className='system-page'>
       <h1>System Page</h1>
       <div className="customers-container">
         <div className="all-customers">
@@ -52,8 +58,8 @@ export const SystemPage = () => {
           </div>
         </div>
 
-        <span dangerouslySetInnerHTML={{__html:"<sCript>alert(1)</script>"}}></span>
 
       </div>
     </div>;
+    </div>
 };

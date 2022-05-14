@@ -29,6 +29,10 @@ export const Container = ({name, email, password, handleChange, userDetails}) =>
                 const res = await axios.post("https://localhost:3001/create-user", {
                     userDetails
                 })
+                if(res.data === "user already registered") {
+                    SetTextToSend("user already registered");
+                    setIsOpen(true);
+                }
                 if(res.data === "You Reached the top of the attempts") {
                     SetTextToSend("You Reached the top of the attempts");
                     setIsOpen(true);
@@ -42,10 +46,6 @@ export const Container = ({name, email, password, handleChange, userDetails}) =>
                     setIsOpen(true);
                 }
                 else if(res) {
-                    console.log(res);
-                    const {email,customers} = res.data;
-                    const customersRes = JSON.parse(customers);
-                    dispatch({type: "INITIALIZE_USER", payload: {email: email, customers: customersRes} })
                     SetTextToSend("User Created")
                     setIsOpen(true);
                 }
