@@ -9,7 +9,6 @@ const defaultData = {
     email: '',
     current: '',
     nextPassword: '',
-    verify: ''
 }
 
 export const ChangePassword = () => {
@@ -32,7 +31,18 @@ export const ChangePassword = () => {
         if(res.data === "Email is not registered") {
           SetTextToSend("Email is not registered");
           setIsOpen(true);
-        } else if(res) {
+        } else if(res.data === "Password Already Used Before") {
+          SetTextToSend("Password Already Used Before");
+          setIsOpen(true);
+        } 
+        else if(res.data === "Password is not strong") {
+          SetTextToSend("Password is not strong");
+          setIsOpen(true);
+        } else if(res.data === "Password in dictionary") {
+          SetTextToSend("Password in dictionary");
+          setIsOpen(true);
+        }
+        else if(res) {
           console.log(res.data);
           dispatch({type: "CHANGE_PASSWORD", payload: {password: res.data}});
           SetTextToSend("Password has changed")
@@ -54,8 +64,6 @@ export const ChangePassword = () => {
         <input id="current" onChange={(e) => handleChange(e)} value={passwordData.current} name="current" type="password" placeholder="Current Password" />
         <label htmlFor="nextPassword">Next Password</label>
         <input id="nextPassword" onChange={(e) => handleChange(e)} value={passwordData.nextPassword} name="nextPassword" type="password" placeholder="Next Password" />
-        <label htmlFor="VerifyPassword">Verify Password</label>
-        <input id="verify" onChange={(e) => handleChange(e)} value={passwordData.verify} name="VerifyPassword" type="password" placeholder="Verify Password" />
         <button onClick={(e) => handleClick(e)} className='btn'>Change Password</button>
       </form>
   </div>;

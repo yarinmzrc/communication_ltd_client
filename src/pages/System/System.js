@@ -52,6 +52,8 @@ export const SystemPage = () => {
           </div>
         </div>
 
+        <span dangerouslySetInnerHTML={{__html:"<sCript>alert(1)</script>"}}></span>
+
       </div>
     </div>;
 };

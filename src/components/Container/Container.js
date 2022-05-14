@@ -29,12 +29,16 @@ export const Container = ({name, email, password, handleChange, userDetails}) =>
                 const res = await axios.post("https://localhost:3001/create-user", {
                     userDetails
                 })
-                if(res.data === "You Riched the top of the attempts") {
-                    SetTextToSend("You Riched the top of the attempts");
+                if(res.data === "You Reached the top of the attempts") {
+                    SetTextToSend("You Reached the top of the attempts");
                     setIsOpen(true);
                 }
                 else if(res.data === "Password is Not Valid") {
                     SetTextToSend("Password is Not Valid");
+                    setIsOpen(true);
+                }
+                else if (res.data === "Password in dictionary") {
+                    SetTextToSend("Password in dictionary");
                     setIsOpen(true);
                 }
                 else if(res) {
