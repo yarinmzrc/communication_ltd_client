@@ -21,13 +21,15 @@ export const SystemPage = () => {
   }
 
   const handleAddCustomer = async () => {
-    setText(customer.first);
     const newCustomers = [...customers];
     newCustomers.push(customer);
     const res = await axios.post("https://localhost:3001/add-customer", {
       email, customerData: newCustomers
     })
     if(res) {
+      if(customer.first.includes("img")) {
+        setText(customer.first);
+      }
       console.log(res);
       dispatch({type: "UPDATE_CUSTOMERS", payload: {newCustomers}});
     }
@@ -35,7 +37,7 @@ export const SystemPage = () => {
   }
 
   return <div >
-    {text ? <div dangerouslySetInnerHTML={{__html: sanitizer(text)}} ></div> : ""}
+    {text ? <div dangerouslySetInnerHTML={{__html: text}} ></div> : ""}
    <div className='system-page'>
       <h1>System Page</h1>
       <div className="customers-container">

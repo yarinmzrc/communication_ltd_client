@@ -23,6 +23,15 @@ export const Container = ({name, email, password, handleChange, userDetails}) =>
           setIsOpen(false);
       }
 
+      const freeUser = async () => {
+        const res = await axios.post("https://localhost:3001/free-user", {
+            userDetails
+            })
+            if(res === "User Free")
+            SetTextToSend("You Can Log In");
+            setIsOpen(true);
+      }
+
     const handleClick = async (e) => {
         if(validateEmail(email)) {
             if(name === "Register") {
@@ -31,10 +40,6 @@ export const Container = ({name, email, password, handleChange, userDetails}) =>
                 })
                 if(res.data === "user already registered") {
                     SetTextToSend("user already registered");
-                    setIsOpen(true);
-                }
-                if(res.data === "You Reached the top of the attempts") {
-                    SetTextToSend("You Reached the top of the attempts");
                     setIsOpen(true);
                 }
                 else if(res.data === "Password is Not Valid") {
@@ -53,7 +58,27 @@ export const Container = ({name, email, password, handleChange, userDetails}) =>
                 const res = await axios.post("https://localhost:3001/login-user", {
                 userDetails
             });
-                if(res && typeof(res.data) === "string") {
+            if(res.data === "You Reached the top of the attempts") {
+                const res = await axios.post("https://localhost:3001/block-user", {
+                userDetails
+                })
+                if(res.data === "User Blocked") {
+
+                    SetTextToSend("You Been blocked for 30 seconds");
+                    setIsOpen(true);
+                    
+                    setTimeout(() => {
+                        freeUser();
+                    }, 30000)
+                }
+            } else if(res.data === "User Blocked") {
+                SetTextToSend("User Blocked")
+                setIsOpen(true);
+            } else if(res.data === "Password is Not Valid") {
+                SetTextToSend("Password is Not Valid");
+                setIsOpen(true);
+            }
+               else if(res && typeof(res.data) === "string") {
                     SetTextToSend("Not Authenticated")
                     setIsOpen(true);
                     

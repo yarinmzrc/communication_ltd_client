@@ -1,7 +1,7 @@
 const initialState = {
     user: {},
     authenticated: localStorage.getItem('token') ? true : false,
-    loading: true
+    loading: true,
 }
 
 export const userReducer = (state=initialState, action) => {
